@@ -1,43 +1,17 @@
-# import re
-# #เราจะใช้ความรู้อันน้อยนิดของเราทำดู
-# with open('province.sql', 'r', encoding='utf-8') as province:
-#   for line in province:
-#     x = line.split()
-#     x = x[7:9]
-#     x = x
-#     print(x)
-
-
+#แบบแรก หาจังหวัดผ่านเลข จากfile result_province.txt
 import re
 
-# ฟังก์ชันสำหรับอ่านไฟล์และแยกข้อมูลเฉพาะ code กับ name
-def read_sql_file_and_process(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        content = file.read()
+# รับ input จากผู้ใช้
+user = input('ใส่จังหวัดที่ต้องการหา เช่น "กรุงเทพมหานคร" หรือ "10": ')
 
-    # ใช้ regex เพื่อจับข้อมูลทุกชุดที่มีรูปแบบ (code, name, ...), รองรับหลายชื่อ
-    # เช่น acode, fcode, aname, fname หรือชื่ออื่น ๆ ที่อาจมี
-    pattern = r"\((\w+),\s*'([^']+)',"  # ใช้ \w+ เพื่อจับตัวอักษรและตัวเลขของ code
-    matches = re.findall(pattern, content)
+# เปิดไฟล์และค้นหาข้อมูล
+with open('result_province.txt', 'r', encoding='utf-8') as file:
+ for line in file:
+        if re.search(re.escape(user), line):
+            # ดึงข้อมูลในวงเล็บ
+            match = re.search(r"\('(\d+)', '([^']+)'\)", line)
+            if match:
+                province_code = match.group(1)  # รหัสจังหวัด
+                province_name = match.group(2)  # ชื่อจังหวัด
+                print(f"{province_code}, {province_name}")
 
-    return matches
-
-# รายชื่อไฟล์ที่ต้องการประมวลผล
-files = [
-    "province.sql"
-]
-
-# อ่านและประมวลผลแต่ละไฟล์
-for file_path in files:
-    data = read_sql_file_and_process(file_path)
-    print(f"Processed data from {file_path}:")
-    for row in data[:5]:  # แสดงข้อมูล 5 บรรทัดแรกเพื่อดูตัวอย่าง
-        print(row)
-    print("\n")
-    
-with open('result_province.txt', 'w', encoding='utf-8') as write_province:
-  for row in data:
-    write_province.write(f"('{row[0]}', '{row[1]}'),\n")
-
-
-    
