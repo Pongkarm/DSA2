@@ -15,3 +15,5 @@ with open('result_province.txt', 'r', encoding='utf-8') as file:
                 province_name = match.group(2)  # ชื่อจังหวัด
                 print(f"{province_code}, {province_name}")
 
+
+#แบบสอง หาจังหวัดผ่านเลข จากfile result_province.txt
