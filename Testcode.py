@@ -21,10 +21,10 @@ import re
 
 import re
 
-text = "Name: John Doe, Email: john.doe@example.com, Phone: 123-456-7890"
+text = "Name: John Doe, Email: john.doe@example.com, Phone: 123-456-7890 655"
 
 # กำหนด Regular Expression ที่มีหลายกลุ่ม
-pattern = r"Name: (\w+ \w+), Email: (\S+@\S+), Phone: (\d{3}-\d{3}-\d{4})"
+pattern = r"Name: (\w+ \w+), Email: (\S+@\S+), Phone: (\d{3}-\d{3}-\d{4}) (\d+)"
 
 # ค้นหาข้อความที่ตรงกับ pattern
 match = re.search(pattern, text)
@@ -33,9 +33,11 @@ if match:
     name = match.group(1)  # กลุ่มแรก คือชื่อ (John Doe)
     email = match.group(2) # กลุ่มที่สอง คืออีเมล (john.doe@example.com)
     phone = match.group(3) # กลุ่มที่สาม คือเบอร์โทรศัพท์ (123-456-7890)
+    phone = match.group(4) 
     print(f"Name: {name}")
     print(f"Email: {email}")
     print(f"Phone: {phone}")
+    print(match.group(4))
 else:
     print("ไม่พบข้อมูลที่ตรงกัน")
 
