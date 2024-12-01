@@ -64,4 +64,15 @@ for file_path in files:
     
 with open('amphoe.txt', 'w', encoding='utf-8') as write_province:
   for row in data:
-    write_province.write(f"{row[0]} {row[1]} {row[2]} {row[3]}\n")
+    write_province.write(f"'{row[0]}' '{row[1]}' '{row[2]}' '{row[3]}'\n")
+#3333333333333333333333333333
+# for file_path in files:
+#     data = read_sql_file_and_process(file_path)
+#     print(f"Processed data from {file_path}:")
+#     for row in data[:5]:  # แสดงข้อมูล 5 บรรทัดแรกเพื่อดูตัวอย่าง
+#         print(row)
+#     print("\n")
+    
+# with open('amphoe.txt', 'w', encoding='utf-8') as write_province:
+#   for row in data:
+#     write_province.write(f"{row[0]} {row[1]} {row[2]} {row[3]}\n")
