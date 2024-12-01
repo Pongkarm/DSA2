@@ -19,14 +19,24 @@ import re
 
 import re
 
-text = "My email is example@test.com and phone is 123-456-7890."
+import re
 
-# ค้นหาอีเมลและเบอร์โทรศัพท์ในข้อความ
-match = re.search(r"(\S+@\S+)\s.*?(\d{3}-\d{3}-\d{4})", text)
+text = "Name: John Doe, Email: john.doe@example.com, Phone: 123-456-7890"
+
+# กำหนด Regular Expression ที่มีหลายกลุ่ม
+pattern = r"Name: (\w+ \w+), Email: (\S+@\S+), Phone: (\d{3}-\d{3}-\d{4})"
+
+# ค้นหาข้อความที่ตรงกับ pattern
+match = re.search(pattern, text)
 
 if match:
-    email = match.group(1)  # กลุ่มแรกที่จับคืออีเมล
-    phone = match.group(2)  # กลุ่มที่สองที่จับคือเบอร์โทรศัพท์
+    name = match.group(1)  # กลุ่มแรก คือชื่อ (John Doe)
+    email = match.group(2) # กลุ่มที่สอง คืออีเมล (john.doe@example.com)
+    phone = match.group(3) # กลุ่มที่สาม คือเบอร์โทรศัพท์ (123-456-7890)
+    print(f"Name: {name}")
     print(f"Email: {email}")
     print(f"Phone: {phone}")
+else:
+    print("ไม่พบข้อมูลที่ตรงกัน")
+
 
